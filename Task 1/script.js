@@ -8,3 +8,48 @@ pamatyti jo pateikto svorio kovertavimą į:
 Pastaba: atvaizdavimas turi būti matomas pateikus formą ir pateikiamas
 <div id="output"></div> viduje, bei turi turėti bent minimalų stilių;
 ------------------------------------------------------------------- */
+
+const form = document.querySelector("form");
+const weightInput = document.querySelector("#search");
+
+function convertWeight(e) {
+  e.preventDefault();
+  return (
+    createCard(convertToLb(), "Weight in pounds", "lb"),
+    createCard(convertToGram(), "Weight in grams", "g"),
+    createCard(convertToOz(), "Weight in ounces", "oz")
+  );
+}
+
+const convertToLb = () => {
+  const converted = Number(weightInput.value) * 2.2046;
+  return Math.round(converted);
+};
+const convertToGram = () => {
+  const converted = Number(weightInput.value) / 0.001;
+  return Math.round(converted);
+};
+const convertToOz = () => {
+  const converted = Number(weightInput.value) * 35.274;
+  return Math.round(converted);
+};
+
+const createCard = (converterMethod, converterTitle, converterUnit) => {
+  const convertedWeight = document.querySelector("#output");
+
+  const cardDiv = document.createElement("div");
+  const title = document.createElement("h2");
+  const weight = document.createElement("h3");
+  const unit = document.createElement("span");
+
+  cardDiv.setAttribute("class", "card");
+  title.innerText = converterTitle;
+  weight.innerText = converterMethod;
+  unit.innerText = converterUnit;
+  weight.append(unit);
+  cardDiv.append(title, weight);
+
+  return convertedWeight.append(cardDiv);
+};
+
+form.addEventListener("submit", convertWeight);
