@@ -23,15 +23,15 @@ function convertWeight(e) {
 
 const convertToLb = () => {
   const converted = Number(weightInput.value) * 2.2046;
-  return Math.round(converted);
+  return converted.toFixed(2);
 };
 const convertToGram = () => {
   const converted = Number(weightInput.value) / 0.001;
-  return Math.round(converted);
+  return converted;
 };
 const convertToOz = () => {
   const converted = Number(weightInput.value) * 35.274;
-  return Math.round(converted);
+  return converted.toFixed(2);
 };
 
 const createCard = (converterMethod, converterTitle, converterUnit) => {
